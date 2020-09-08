@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        var checkSubmitFlg = false; //防止表单重复提交标示符
+        function myCheck() {
+            if (checkSubmitFlg == true) {
+                return false; //当表单被提交过一次后checkSubmitFlg将变为true,根据判断将无法进行提交。
+            }
+
+            for (var i = 0; i < document.form1.elements.length - 1; i++) {
+                if (document.form1.elements[i].value == "") {
+                    alert("当前表单不能有空项");
+                    document.form1.elements[i].focus();
+                    return false;
+                }
+            }
+            checkSubmitFlg == true;
+            return true;
+        }
+    </script>
+</head>
+<body>
+<form name="form1" action="/login?username=astaxie" method="post" onSubmit="return myCheck()">
+    用户名:<input type="text" name="username">
+    密码:<input type="password" name="password">
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>

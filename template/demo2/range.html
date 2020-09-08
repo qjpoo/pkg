@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>range</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        table tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+        table tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+    </style>
+</head>
+<body>
+<hr>
+
+<table width="50%" class="table">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>地址</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{ range $index, $user := . }}
+    <tr>
+        <td>{{$index}}</td>
+        <td>{{$user.Name}}</td>
+        <td>{{$user.Age}}</td>
+        <td>{{$user.Addr}}</td>
+    </tr>
+    {{end}}
+
+    </tbody>
+
+</table>
+
+
+<p>map lengh: {{ len . }}</p>
+<p>index: {{ index . 1  }}</p>
+<p>index: {{ index . 2  }}</p>
+<p>index: {{ index . 3  }}</p>
+<p>print:　{{ print . }}</p>
+
+<p>
+    {{ with index . 1}}
+    printf: {{ printf "姓名: %s, 年龄: %d, 地址: %s\n"  .Name .Age .Addr  }}
+    {{end}}
+</p>
+
+
+<p>println: {{ println . }}</p>
+
+
+
+
+</body>
+</html>

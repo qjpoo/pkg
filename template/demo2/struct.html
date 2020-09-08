@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <ul>
+        <li >
+            {{/*注解name*/}}
+            <font color="blue">Name: {{.Name}}</font>
+        </li>
+        <li>
+            {{/*Age*/}}
+            Age: {{.Age}}
+        </li>
+        <li>
+            Addr: {{.Addr}}
+        </li>
+</div>
+{{ $age := .Age }}
+
+<!-- {{ $Age := . }}-->
+
+<div>
+    my age from struct variables {{ $age }}
+</div>
+
+<hr>
+
+{{ if gt .Age 18 }}
+<div> Age 大于18 </div>
+{{else}}
+<div> {{ $age }}</div>
+{{end}}
+
+
+
+
+
+
+
+</body>
+</html>

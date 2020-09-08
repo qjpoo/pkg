@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册用户信息</title>
+</head>
+<body>
+<h1>registry user info </h1>
+<form action="reg" method="post">
+    <div>
+        <label for="i1">username: </label>
+        <input id="i1" name="username" type="text">
+    </div>
+    <div>
+        <label>password:
+            <input name="password" type="password">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+        </label>
+        <input name="gender" value="male" type="radio">男
+        <input name="gender" value="female" type="radio">女
+    </div>
+
+    <div>
+        <label>爱好:</label>
+        <input type="checkbox" value="c">c
+        <input type="checkbox" checked value="go">go
+        <input type="checkbox" value="shell">shell
+        <input type="checkbox" value="java">java
+    </div>
+
+    <div>
+        <label>地址：</label>
+        <select name="addr">
+            <option value="bj">北京</option>
+            <option value="sh">上海</option>
+            <option value="gz">广州</option>
+            <option value="sz">深圳</option>
+            <option value="wh" selected>武汉</option>
+        </select>
+    </div>
+    <div>
+        <label>头像：</label>
+        <input type="file" name="avatar", accept="image/*">
+    </div>
+
+    <div>
+        <label>个性签名：</label>
+        <textarea name="info" cols="30" rows="10"></textarea>
+    </div>
+
+    <div>
+        <input type="submit" value="提交">
+    </div>
+
+</form>
+</body>
+</html>
