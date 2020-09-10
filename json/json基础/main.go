@@ -36,4 +36,95 @@ func main() {
 		fmt.Println(k, "----->", v)
 	}
 
+	ret := TraverseJsonToTree(a1)
+	fmt.Println(string(ret))
+
+}
+
+func TraverseJsonToTree(json []byte) []byte {
+	stringFlag := false
+	jsonTree := make([]byte, 0)
+	tabNum := 0
+	dirFlag := false
+	jsonLen := len(json)
+
+	for i, jsChar := range json {
+		if stringFlag {
+			jsonTree = append(jsonTree, jsChar)
+			if jsChar == '"' {
+				stringFlag = false
+			}
+			continue
+		}
+
+		if jsChar == '"' {
+			jsonTree = append(jsonTree, jsChar)
+			stringFlag = true
+			continue
+		}
+
+		if jsChar == '{' || jsChar == '[' {
+			jsonTree = append(jsonTree, jsChar)
+			jsonTree = append(jsonTree, '\r')
+			jsonTree = append(jsonTree, '\n')
+
+			tabNum++
+			for tabIndex := 0; tabIndex < tabNum; tabIndex++ {
+				jsonTree = append(jsonTree, '\t')
+			}
+			continue
+		}
+
+		if jsChar == ',' {
+			jsonTree = append(jsonTree, jsChar)
+			jsonTree = append(jsonTree, '\r')
+			jsonTree = append(jsonTree, '\n')
+
+			for tabIndex := 0; tabIndex < tabNum; tabIndex++ {
+				jsonTree = append(jsonTree, '\t')
+			}
+			continue
+		}
+
+		if dirFlag {
+			dirFlag = false
+			tabNum--
+			jsonTree = append(jsonTree, '\r')
+			jsonTree = append(jsonTree, '\n')
+
+			for tabIndex := 0; tabIndex < tabNum; tabIndex++ {
+				jsonTree = append(jsonTree, '\t')
+			}
+
+			jsonTree = append(jsonTree, jsChar)
+			continue
+		}
+
+		if jsChar == ']' || jsChar == '}' {
+			tabNum--
+			jsonTree = append(jsonTree, '\r')
+			jsonTree = append(jsonTree, '\n')
+
+			for tabIndex := 0; tabIndex < tabNum; tabIndex++ {
+				jsonTree = append(jsonTree, '\t')
+			}
+
+			jsonTree = append(jsonTree, jsChar)
+
+			if (i + 1) < jsonLen {
+				if json[i+1] != ',' {
+					dirFlag = true
+				}
+			}
+			continue
+		}
+
+		if jsChar == ':' || (jsChar >= '0' && jsChar <= '9') {
+			jsonTree = append(jsonTree, jsChar)
+			continue
+		}
+
+	}
+
+	return jsonTree
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -80,6 +81,45 @@ func main() {
 	fmt.Println("change varn: ", varn)
 	getS()
 
+
+	// mashal
+	m := Message{"Alice", "Hello", 1294706395881547000}
+	b1, _ := json.Marshal(m)
+	fmt.Println(string(b1))
+	//fmt.Printf("type: %T, value: %#v", b1, b1)
+
+	fmt.Println("------->")
+	b0 := []byte(`{"Name":"Wednesday","Age":6,"Parents":["Gomez","Morticia"]}`)
+	//var m1 map[string]interface{}
+	m1 := make(map[string]interface{})
+	json.Unmarshal(b0, &m1)
+
+	if v8, ok := m1["Parents"].([]interface{});!ok{
+		fmt.Println("err")
+	}else {
+		fmt.Println(v8)
+		for _, value0 := range v8 {
+			k9 := value0.(string)
+			fmt.Printf("%T, %v\n", k9, k9)
+		}
+	}
+	for _, v := range m1 {
+		//fmt.Println("------>: ", v)
+		switch  vv := v.(type){  // //vv表示v1接口转换成的值
+		case float64:
+			fmt.Println("===========float64: ", vv)
+		case string:
+			fmt.Println("string: ", vv)
+		case []interface{}:
+			//fmt.Println(k, "is []interface ...")
+			for i, u := range vv {
+				fmt.Println(i, u)
+		}
+
+		}
+	}
+
+
 }
 
 /*
@@ -109,6 +149,13 @@ func setVarn(i int)  {
 
 func getS()  {
 	fmt.Println("getS func varn: ", varn)
+}
+
+
+type Message struct {
+	Name string
+	Body string
+	Time int64
 }
 
 
